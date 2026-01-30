@@ -80,10 +80,11 @@ def crack_password(target_hash: str, database: dict) -> str:
     return None # Pas trouvé
 dico=load_rainbow_table()
 def simulation(n):
+    cracked_passwords=0
     for i in tqdm.tqdm(range(n)):
-        cracked_passwords=0
         hash1=Tools.md5_hash(Tools.generate_password())
         if type(crack_password(hash,dico))==str:
             cracked_passwords+=1
     print(f"{cracked_passwords} cracked passwords and {n - cracked_passwords} uncracked passwords")
 simulation(1000)
+
