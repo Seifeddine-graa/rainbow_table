@@ -17,6 +17,7 @@ def compute_chain(password)->tuple :
     for i in range(1,chains_length):
         hash=Tools.md5_hash(password_intermediaire)
         password_intermediaire=Tools.reduce(hash,i)
+    hash=Tools.md5(password_intermediaire)
     return(password,hash)
 def compute_rainbow_table():
     """
@@ -82,9 +83,10 @@ dico=load_rainbow_table()
 def simulation(n):
     cracked_passwords=0
     for i in tqdm.tqdm(range(n)):
-        hash1=Tools.md5_hash(Tools.generate_password())
-        if type(crack_password(hash,dico))==str:
-            cracked_passwords+=1
+        hash1 = Tools.md5_hash(Tools.generate_password())
+        result = crack_password(hash1, dico)
+        if isinstance(result, str):
+            cracked_passwords += 1
     print(f"{cracked_passwords} cracked passwords and {n - cracked_passwords} uncracked passwords")
-simulation(1000)
+simulation(500)
 
