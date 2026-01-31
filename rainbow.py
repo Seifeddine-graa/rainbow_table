@@ -2,7 +2,7 @@ import Tools
 import pickle as pk
 import tqdm 
 #longueur des chaines arc-en-ciel
-chains_length=256
+chains_length=150
 #taille de la table arc-en-ciel
 rainbow_table_size=10_000_000
 def compute_chain(password)->tuple :
@@ -17,7 +17,7 @@ def compute_chain(password)->tuple :
     for i in range(1,chains_length):
         hash=Tools.md5_hash(password_intermediaire)
         password_intermediaire=Tools.reduce(hash,i)
-    hash=Tools.md5(password_intermediaire)
+    hash=Tools.md5_hash(password_intermediaire)
     return(password,hash)
 def compute_rainbow_table():
     """
@@ -88,5 +88,4 @@ def simulation(n):
         if isinstance(result, str):
             cracked_passwords += 1
     print(f"{cracked_passwords} cracked passwords and {n - cracked_passwords} uncracked passwords")
-simulation(500)
-
+simulation(1000)
